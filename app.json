@@ -21,9 +21,6 @@
       "bundler": "metro",
       "output": "single"
     },
-    "plugins": [
-      "react-native-reanimated"
-    ],
     "experiments": {
       "tsconfigPaths": true
     }
