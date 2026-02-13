@@ -47,11 +47,7 @@ export function NativeContextMenu({ actions, children }: NativeContextMenuProps)
     <View style={{ position: 'relative' }}>
       <Pressable
         onPress={() => setOpen(false)}
-        onContextMenu={(event: unknown) => {
-          const maybeEvent = event as { preventDefault?: () => void };
-          maybeEvent.preventDefault?.();
-          setOpen(true);
-        }}
+        onLongPress={() => setOpen(true)}
       >
         {children}
       </Pressable>
