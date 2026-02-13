@@ -8,7 +8,7 @@ import { formatMessageTime } from '@/utils/time';
 
 type MessageRowProps = {
   message: ChatMessage;
-  author?: ChatUser;
+  author: ChatUser | undefined;
   onLongPress?: (message: ChatMessage) => void;
 };
 

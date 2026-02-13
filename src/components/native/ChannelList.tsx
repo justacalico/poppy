@@ -15,10 +15,9 @@ export function ChannelList({ channels, activeChannelId, onSelectChannel }: Chan
   const [collapsed, setCollapsed] = useState<Record<string, boolean>>({});
 
   const grouped = channels.reduce<Record<string, ChatChannel[]>>((acc, channel) => {
-    if (!acc[channel.category]) {
-      acc[channel.category] = [];
-    }
-    acc[channel.category].push(channel);
+    const list = acc[channel.category] ?? [];
+    list.push(channel);
+    acc[channel.category] = list;
     return acc;
   }, {});
 

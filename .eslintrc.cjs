@@ -28,6 +28,8 @@ module.exports = {
   ignorePatterns: ['dist', 'build', 'node_modules'],
   rules: {
     'react/react-in-jsx-scope': 'off',
-    '@typescript-eslint/no-explicit-any': 'warn'
+    '@typescript-eslint/no-explicit-any': 'warn',
+    '@typescript-eslint/no-require-imports': 'off',
+    '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }]
   }
 };

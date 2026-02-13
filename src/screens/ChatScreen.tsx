@@ -87,10 +87,10 @@ export function ChatScreen() {
     }
   });
 
-  const channels = channelsQuery.data ?? [];
+  const channels = useMemo(() => channelsQuery.data ?? [], [channelsQuery.data]);
   const channelName = channels.find((channel) => channel.id === activeChannelId)?.name ?? 'general';
 
-  const members = membersQuery.data ?? [];
+  const members = useMemo(() => membersQuery.data ?? [], [membersQuery.data]);
   const membersById = useMemo(() => Object.fromEntries(members.map((member) => [member.id, member])), [members]);
 
   const messages = useMemo(() => {
@@ -110,14 +110,16 @@ export function ChatScreen() {
   });
 
   useEffect(() => {
-    if (!channels.length) {
+    const firstChannel = channels[0];
+
+    if (!firstChannel) {
       return;
     }
 
     const exists = channels.some((channel) => channel.id === activeChannelId);
 
     if (!exists) {
-      setActiveChannel(channels[0].id);
+      setActiveChannel(firstChannel.id);
     }
   }, [activeChannelId, channels, setActiveChannel]);
 
@@ -211,7 +213,6 @@ export function ChatScreen() {
               activeServerId={activeServerId}
               onSelectServer={(serverId) => {
                 setActiveServer(serverId);
-                setActiveChannel('channel-1');
               }}
             />
             <ChannelList

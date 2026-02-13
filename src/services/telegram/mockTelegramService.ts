@@ -32,8 +32,15 @@ const sampleBodies = [
 ];
 
 function seedMessagesForChannel(channelId: string, count: number): ChatMessage[] {
+  const fallbackAuthor = users[0];
+  const fallbackBody = sampleBodies[0] ?? 'Message';
+
+  if (!fallbackAuthor) {
+    return [];
+  }
+
   return Array.from({ length: count }, (_, i) => {
-    const author = users[i % users.length];
+    const author = users[i % users.length] ?? fallbackAuthor;
     const now = Date.now();
     const createdAt = new Date(now - (count - i) * 60_000).toISOString();
 
@@ -41,7 +48,7 @@ function seedMessagesForChannel(channelId: string, count: number): ChatMessage[]
       id: `${channelId}-message-${i + 1}`,
       channelId,
       authorId: author.id,
-      body: sampleBodies[i % sampleBodies.length],
+      body: sampleBodies[i % sampleBodies.length] ?? fallbackBody,
       createdAt,
       reactions:
         i % 4 === 0
