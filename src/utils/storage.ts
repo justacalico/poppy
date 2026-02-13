@@ -18,14 +18,20 @@ const memoryAdapter: StorageLike = {
   }
 };
 
-let nativeAdapter: StorageLike | null = null;
+function getNativeAdapter(): StorageLike | null {
+  if (Platform.OS === 'web') {
+    return null;
+  }
 
-if (Platform.OS !== 'web') {
-  const { MMKV } = require('react-native-mmkv') as { MMKV: new (config: { id: string }) => StorageLike };
-  nativeAdapter = new MMKV({ id: 'poppy-cache' });
+  try {
+    const { MMKV } = require('react-native-mmkv') as { MMKV: new (config: { id: string }) => StorageLike };
+    return new MMKV({ id: 'poppy-cache' });
+  } catch {
+    return null;
+  }
 }
 
-export const storage = nativeAdapter ?? memoryAdapter;
+export const storage = getNativeAdapter() ?? memoryAdapter;
 
 export function setJsonValue<T>(key: string, value: T) {
   storage.set(key, JSON.stringify(value));
