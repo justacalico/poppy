@@ -1,0 +1,31 @@
+{
+  "expo": {
+    "name": "poppy",
+    "slug": "poppy",
+    "scheme": "poppy",
+    "version": "0.1.0",
+    "orientation": "default",
+    "userInterfaceStyle": "automatic",
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.poppy.client"
+    },
+    "android": {
+      "package": "com.poppy.client",
+      "adaptiveIcon": {
+        "backgroundColor": "#0E1014"
+      }
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "single"
+    },
+    "plugins": [
+      "react-native-reanimated"
+    ],
+    "experiments": {
+      "tsconfigPaths": true
+    }
+  }
+}
